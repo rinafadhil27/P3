@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Perpustakaan Sederhana</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('gambar1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            width: calc(100% - 22px);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .table-container {
+            margin: 0 auto;
+            width: 100%;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .float-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .float-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sistem Perpustakaan Sederhana</h1>
+        <div class="form-container">
+            <input type="text" id="bookTitle" placeholder="Judul Buku">
+            <input type="text" id="bookAuthor" placeholder="Penulis Buku">
+            <input type="text" id="bookTerbit" placeholder="Tahun Terbit">
+            <button onclick="addBook()">Tambah Buku</button>
+        </div>
+        <div class="table-container" id="dataTable" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul Buku</th>
+                        <th>Penulis Buku</th>
+                        <th>Tahun Terbit</th>
+                    </tr>
+                </thead>
+                <tbody id="bookTable">
+                    <!-- Data buku akan ditambahkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class="float-button" onclick="openData()">Lihat Data</button>
+    <script>
+        function addBook() {
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const terbit = document.getElementById('bookTerbit').value;
+            if (title && author && terbit) {
+                // Kirim data buku ke server menggunakan AJAX
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'save_book.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log(xhr.responseText);
+                    }
+                };
+                xhr.send('bookTitle=' + encodeURIComponent(title) + '&bookAuthor=' + encodeURIComponent(author) + '&bookTerbit=' + encodeURIComponent(terbit));
+                // Bersihkan input setelah dikirim
+                document.getElementById('bookTitle').value = '';
+                document.getElementById('bookAuthor').value = '';
+                document.getElementById('bookTerbit').value = '';
+            }
+        }
+
+        function openData() {
+            // Buka data dalam tab baru
+            window.open('view_data.php', '_blank');
+        }
+    </script>
+</body>
+</html>
