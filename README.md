@@ -24,3 +24,5 @@ Manfaat:
 3. Meningkatkan Aksesibilitas: sistem perpustakaan dapat memungkinkan pengguna untuk mencari dan mengelola buku dengan lebih mudah.
 
 Tujuan: Membuat sistem perpustakaan yang sederhana dan efektif untuk mengelola koleksi buku. Dengan menggunakan sistem perpustakaan sederhana ini, pengguna dapat mengelola koleksi buku dengan lebih efektif dan efisien.
+
+Desain Aplikasi Sistem Perpustakaan Sederhana https://www.canva.com/design/DAGkr2I4OnU/TN27BTDrVa2ISCOJ6NZEiQ/edit?utm_content=DAGkr2I4OnU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
